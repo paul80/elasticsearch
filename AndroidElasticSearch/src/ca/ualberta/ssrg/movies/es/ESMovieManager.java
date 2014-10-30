@@ -85,9 +85,12 @@ public class ESMovieManager implements IMovieManager {
 			String status = response.getStatusLine().toString();
 			Log.i(TAG, status);
 			
+			//Parse response
+			
 			SearchResponse<Movie> esResponse = parseSearchResponse(response);
 			Hits<Movie> hits = esResponse.getHits();
 			
+			//Extract result elements from HITS
 			if (hits != null) {
 				if (hits.getHits() != null) {
 					for (SearchHit<Movie> sesr : hits.getHits()) {

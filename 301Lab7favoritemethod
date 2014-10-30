@@ -1,0 +1,23 @@
+	private HttpPost createSearchRequest(String searchString, String field)	throws UnsupportedEncodingException {
+		
+		HttpPost searchRequest = new HttpPost(SEARCH_URL);
+
+		String[] fields = null;
+		if (field != null) {
+			fields = new String[1];
+			fields[0] = field;
+		}
+		
+		SimpleSearchCommand command = new SimpleSearchCommand(searchString,	fields);
+		
+		String query = command.getJsonCommand();
+		Log.i(TAG, "Json command: " + query);
+
+		StringEntity stringEntity;
+		stringEntity = new StringEntity(query);
+
+		searchRequest.setHeader("Accept", "application/json");
+		searchRequest.setEntity(stringEntity);
+
+		return searchRequest;
+	}
